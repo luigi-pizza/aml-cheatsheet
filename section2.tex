@@ -11,8 +11,7 @@ $\mathbf{Y}|\mathbf{X},\beta, \sigma^2 \sampled \mathcal{N}(\mathbf{Y}; \mathbf{
 
 
 \subsection*{MLE: Ordinary Least Squares}
-OLSE is unbiased, orthogonal projection with lowest
-variance. differentiate wrt $\Gb$.\\
+OLSE is unbiased, orthogonal projection with lowest variance. differentiate wrt $\Gb$.\\
 $\mathcal{L} {=} \text{RSS}(\beta){=}\sum_{i{=}1}^n(y_i{-}x_i^T\beta)^2{=}(\mathbf{y}{-}\mathbf{X}\beta)^2$
 \textit{Estimator:} \ $\hat{\beta}^\text{OLS} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y}$\\
 \textit{Prediction:} $\hat{y}{=}\mathbf{X}\hat{\beta}{=}\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y}$
@@ -34,7 +33,7 @@ $=(\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)+\lambda||\beta||_1$
 \textit{Prior: } $\beta \sampled \Normal{\mu_0}{\Lambda^{-1}}$ \\
 \textit{Likelihood:} $Y|\beta,X,\sigma \sampled \Normal{X\beta}{\sigma_n^2 \mathbb{I}}$ \\
 \textit{Posterior: }$\beta|\mathbf{X},\mathbf{y} \sampled \Normal{\mu}{\Sigma}$\\
-$\cdot \  \Sigma = (\sigma_n^{-2}\mathbf{X}^T\mathbf{X} + \bm{\Lambda})^{-1}$ \\
+$\cdot \  \Sigma = (\sigma_n^{-2}\mathbf{X}^T\mathbf{X} + \Lambda)^{-1}$ \\
 $\cdot \  \mu = \Sigma(\Lambda\mu_0 + \sigma_n^{-2}\mathbf{X}^T\mathbf{y})$
 
 

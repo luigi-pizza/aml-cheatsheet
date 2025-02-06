@@ -64,9 +64,9 @@ $J {=} \sum_{x \in \mathcal{X}} \| x - \mu_{c(x)} \|^2$
 top $d$ eigenv. of $S {=} \frac{1}{n} \sum_{i=1}^{n} (x_i {-} \bar{X})(x_i {-} \bar{X})^T$
 
 \textbf{EM} fit GMMs $(\sum_{k=1}^{K} \pi_k \mathcal{N}(x | \mu_k, \Sigma_k))$ by max. likelihood. Reaches local optimum.\\
-Latent variable: $M_{xc} = 1_{c \text{ generated } x}$ \\
+Latent variable: $M_{xc} = 1\{c \text{ generated } x\}$ \\
 $P(\mathcal{X}, M | \theta) {=} \prod_{x} \prod_{c=1}^{k} (\pi_c P(x | \theta_c))^{M_{xc}}$
-$\gamma_{xc} {=} \mathbb{E}[M_{xc} | \mathcal{X}, \theta^{(j)}] {=} \frac{P(x | c, \theta^{(j)}) P(c | \theta^{(j)})}{P(x | \theta^{(j)})}$ \\
+$\gamma_{xc} {=} \mathbb{E}[M_{xc} | \mathcal{X}, \theta^{(j)}] {=} \frac{\pi_c \mathcal{N}(\mathbf{x}; \mu_c, \Sigma_c)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}; \mu_j, \Sigma_j)}$ \\
 $\mu_c^{(j+1)} {=} \frac{\sum_{c \in \mathcal{X}} \gamma_{xc} x}{\sum_{c \in \mathcal{X}} \gamma_{xc}}$
 $\pi_c^{(j+1)} {=} \frac{1}{|\mathcal{X}|} \sum_{c \in \mathcal{X}} \gamma_{xc}$ 
 $(\sigma_c^2)^{(j+1)} {=} \frac{\sum_{c \in \mathcal{X}} \gamma_{xc} (x - \mu_c)^2}{\sum_{c \in \mathcal{X}} \gamma_{xc}}$ \\
@@ -81,3 +81,7 @@ $+\mathbb{E}_X\mathbb{E}_D[(\hat{f}_D(X)-\mathbb{E}_D[\hat{f}(X)])^2]$ (var.)\\
 $+\mathbb{E}_X[(\mathbb{E}_D[\hat{f}_D(X)]-\mathbb{E}_{Y|X}[Y])^2]$ (bias$^2$)\\
 With $\mathbb{E}_{Y|X}[Y]$ the expected label and $\mathbb{E}_{D}[\hat{f}(X)]$ the expected classifier.
 
+\subsection*{p-value}
+$\text{p-value} {=} \inf \{\alpha : T(X^n) {\in} \{ x {\mid} T(x) {\geq} c \} \}$
+
+likelihood to accept $H_0$. it is the least probable threshold for rejecting the $H_0$.

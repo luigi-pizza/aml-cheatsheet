@@ -12,18 +12,15 @@ with weights $\{\alpha_b\}_{b=1}^B $\\
 Requires diversity of the classifiers.
 
 \subsection*{Bagging}
-Train on bootstrapped subsets.\\
-Sample: $\mathcal{Z}=\{(x_1,y_1),\cdots(x_n,y_n)\}$\\
-$\mathcal{Z}^*$: chose i.i.d from $\mathcal{Z}$ w. replacement.\\
+Train on bootstrapped subsets.
 Covariance small, variance similar, bias weakly affected.
+\textbf{Random Forest}
+Collection of uncorr. decision trees.
+Partition data space recursively. Grow the tree sufficiently deep to reduce bias. (random sample cuts to reduce bias).
+Prediction with voting.
 
- \subsection*{Random Forest (Bagging strategy)}
- Collection of uncorr. decision trees.
- Partition data space recursively. Grow the tree sufficiently deep to reduce bias. (each tree on other bagged set and with random collection of features available at every node)
- Prediction with voting.
-
-\subsection*{Boosting}
-Combine uncorr. weak learners in sequence. (Weak to avoid overfitting).\\
+\textbf{Boosting} {(Weak to avoid overfitting)} \\
+Combine uncorr. weak learners in sequence.
 Coeff. of $\hat{c}_{b+1}$ depend on $\hat{c}_{b}$'s results\\
 \textbf{AdaBoost} (minimizes exp. loss)\\
 Init: $\mathcal{X}{=}\{(x_1,y_1),\cdots,(x_n,y_n)\}, w_i^{(1)}{=}\frac{1}{n}$\\
