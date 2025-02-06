@@ -1,0 +1,125 @@
+\documentclass[11pt,landscape,a4paper]{article}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath, bm}
+\usepackage{bbm}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage[t1]{sourcesanspro}
+%\usepackage[lf]{MyriadPro}
+%\usepackage[lf,minionint]{MinionPro}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=0mm,bottom=4mm,left=0mm,right=1mm]{geometry}
+% \usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{mathptmx}
+\usepackage{paralist}
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+\usepackage[framemethod=tikz]{mdframed}
+
+\thinmuskip=3mu
+\medmuskip=4mu %plus 2mu minus 4mu
+\thickmuskip=5mu
+\let\bar\overline
+
+\definecolor{mygrey}{cmyk}{0,0,0,0.85}
+\definecolor{myred}{cmyk}{0.81,0.81,0,0.3}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\E}[2][]{\mathbb{E}_{#1}[#2]}
+\renewcommand{\P}[1]{\mathbb{P}(#1)}
+\newcommand{\sampled}{\thicksim}
+\newcommand{\Gt}{\theta}
+\newcommand{\Ge}{\epsilon}
+\newcommand{\Geb}{\mathbb{\epsilon}}
+\newcommand{\Gth}{\hat{\theta}}
+\newcommand{\Gts}{\theta^\star}
+\newcommand{\Gb}{\beta}
+\newcommand{\Gbb}{\mathbb{\beta}}
+\newcommand{\convP}{\overset{p}{\to}}
+\newcommand{\GNormal}{\mathcal{N}(\mu,\,\sigma^{2})}
+\newcommand{\NNormal}{\mathcal{N}(0,\,1)}
+\newcommand{\Normal}[2]{\mathcal{N}(#1,\,#2)}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\Gbs}{\beta^\star}
+\newcommand{\Data}{\mathcal{D}}
+\newcommand{\Datatrain}{\mathcal{D}^{train}}
+\newcommand{\Datatest}{\mathcal{D}^{test}}
+\newcommand{\HypotesisSpace}{\mathcal{H}}
+\newcommand{\Lossfct}{\mathcal{L}}
+\newcommand{\Midentity}[1]{\mathbb{I}_{#1}}
+\newcommand{\R}[1][]{\mathbb{R}^{#1}}
+
+\DeclareMathOperator{\di}{d\!}
+
+% Reset weird mathptmx \mathcal symbols
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+% Hackeroni for smaller syms
+\newcommand{\smallsim}{\smallsym{\mathrel}{\sim}}
+
+\makeatletter
+\newcommand{\smallsym}[2]{#1{\mathpalette\make@small@sym{#2}}}
+\newcommand{\make@small@sym}[2]{%
+  \vcenter{\hbox{$\m@th\downgrade@style#1#2$}}%
+}
+\newcommand{\downgrade@style}[1]{%
+  \ifx#1\displaystyle\scriptstyle\else
+    \ifx#1\textstyle\scriptstyle\else
+      \scriptscriptstyle
+  \fi\fi
+}
+\makeatother
+% End hackeroni
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\everymath\expandafter{\the\everymath \color{mygrey}}
+\everydisplay\expandafter{\the\everydisplay \color{mygrey}}
+
+\renewcommand{\baselinestretch}{.75}
+\pagestyle{empty}
+
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\color{myred}\sffamily\small\bfseries}}
+
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\sffamily\bfseries}}
+
+
+\makeatother
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{5pt}
+
+\begin{document}
+\small
+\begin{multicols*}{5}
+\fontdimen2\font=0.3ex
+\input{section1}
+\input{section2}
+\input{section3}
+\input{section4}
+\input{section5}
+\input{section6}
+\input{section7}
+\end{multicols*}
+\end{document}

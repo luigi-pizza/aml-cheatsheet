@@ -1,0 +1,40 @@
+\section*{Regression}
+\textbf{Model of data}:
+$\mathbf{Y}=\mathbf{X}\Gbs +\epsilon \\
+\mathbf{X}{\in}\mathbb{R}^{(d{+}1){\times} n} \quad \beta {\in} \mathbb{R}^{d{+}1} \quad \epsilon {\sampled} \mathcal{N}(\mathbf{0},\mathbb{I}\sigma^2)$\\
+% $\hat{\mathbf{Y}}=\mathbf{X}\hat{\beta}$ \quad
+% $\hat{\beta} \sampled \mathcal{N}(\Gbs, (\mathbf{X}^T\mathbf{X})^{-1}\sigma^2) $ \\
+$\mathbf{Y}|\mathbf{X},\beta, \sigma^2 \sampled \mathcal{N}(\mathbf{Y}; \mathbf{X}^T\beta, \mathbb{I}_{(d+1)}\sigma^2)$
+
+% A Regression has Optimum:\\
+% $f^*(x) = \mathbb{E}_Y[Y|X=x]$
+
+
+\subsection*{MLE: Ordinary Least Squares}
+OLSE is unbiased, orthogonal projection with lowest
+variance. differentiate wrt $\Gb$.\\
+$\mathcal{L} {=} \text{RSS}(\beta){=}\sum_{i{=}1}^n(y_i{-}x_i^T\beta)^2{=}(\mathbf{y}{-}\mathbf{X}\beta)^2$
+\textit{Estimator:} \ $\hat{\beta}^\text{OLS} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y}$\\
+\textit{Prediction:} $\hat{y}{=}\mathbf{X}\hat{\beta}{=}\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y}$
+
+
+\subsection*{MAP: Ridge Regression ($L^2$ penalty)}
+Penalize energy in $\beta$. \textit{Prior:} $\beta{\sampled}\mathcal{N}(0, \lambda^{\text{-}}\mathbb{I})$
+\textit{Loss:} $\mathcal{L} = (\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)+\lambda\beta^T\beta$\\
+\textit{Estimator:} $\hat{\beta}^\text{ridge} = (\mathbf{X}^T\mathbf{X}+\lambda\mathbb{I})^{-1}\mathbf{X}^{T}\mathbf{y}$ \\
+
+\subsection*{MAP: Lasso ($L^1$ penalty)}
+Penalize full $\beta$. Lasso has no closed form.\\
+$\beta \sampled Lapl(0, \lambda^{-1}) = \frac{\lambda}{2} exp(-\lambda |\beta|)$ \\
+$\mathcal{L} = \sum_{i=1}^n(y_i-x_i^T\beta)^2+\lambda\sum_{j=1}^d|\beta_j| $\\\\
+$=(\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)+\lambda||\beta||_1$\\
+\textbf{Bayesian view:} $Y|(X, \beta) \smallsim \mathcal{N}(x^T\beta, \sigma^2 I)$\\
+
+\subsection*{d-Dim Bayesian Linear Regression}
+\textit{Prior: } $\beta \sampled \Normal{\mu_0}{\Lambda^{-1}}$ \\
+\textit{Likelihood:} $Y|\beta,X,\sigma \sampled \Normal{X\beta}{\sigma_n^2 \mathbb{I}}$ \\
+\textit{Posterior: }$\beta|\mathbf{X},\mathbf{y} \sampled \Normal{\mu}{\Sigma}$\\
+$\cdot \  \Sigma = (\sigma_n^{-2}\mathbf{X}^T\mathbf{X} + \bm{\Lambda})^{-1}$ \\
+$\cdot \  \mu = \Sigma(\Lambda\mu_0 + \sigma_n^{-2}\mathbf{X}^T\mathbf{y})$
+
+

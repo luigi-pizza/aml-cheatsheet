@@ -1,0 +1,174 @@
+\section*{Background}
+\textbf{Linear Algebra}\\
+$\| \mathbf{x} \|_p = \left( \sum |x_i|^p \right)^{1/p}$ \quad $\| \mathbf{x} \|_\infty = \max |x_i|$  
+$\text{tr} (\mathbf{A} \mathbf{x} \mathbf{x}^T) = \mathbf{x}^T \mathbf{A} \mathbf{x}$ \\ $| \mathbf{A} \mathbf{B} | = | \mathbf{A} | | \mathbf{B} |$ \quad
+$| \mathbf{A}^m | = | \mathbf{A} |^m$ 
+$(\mathbf{A} {+} \mathbf{U} \mathbf{C} \mathbf{V})^{\text{-}} {=} \mathbf{A}^{\text{-}} {-} \mathbf{A}^{\text{-}} \mathbf{U} (\mathbf{C}^{\text{-}} {+} \mathbf{V} \mathbf{A}^{\text{-}} \mathbf{U})^{\text{-}} \ \ \mathbf{V} \mathbf{A}^{\text{-}}$ \\
+$(\mathbf{A} + \mathbf{B})^{-1} = \mathbf{A}^{-1} - \mathbf{A}^{-1} (\mathbf{A} + \mathbf{B})^{-1} \mathbf{A}^{-1}$ \\
+$\mathbf{U} (\mathbf{V} \mathbf{U} + \mathbf{I})^{-1} = (\mathbf{U} \mathbf{V} + \mathbf{I})^{-1} \mathbf{U}$ \\
+$\mathbf{I} - \mathbf{A} (\mathbf{I} + \mathbf{A})^{-1} = (\mathbf{I} + \mathbf{A})^{-1}$
+\vspace{4px}\\
+\textbf{Probability}\\
+$\text{Ber}(x|\theta) = \theta^x(1-\theta)^{1-x} \quad 0 \leq \theta \leq 1$
+$\mathbb{P}[X|Y]=\frac{\mathbb{P}[X,Y]}{\mathbb{P}[Y]}=\frac{\mathbb{P}[Y|X]\mathbb{P}[X]}{\mathbb{P}[Y]}$ \\
+$p_{Y}(y) = p_{X}(g^{-1}(y)) \left| \det \frac{\partial g^{-1}(y)}{\partial y} \right|$
+% \vspace{4px}\\
+$\mathbbm{E}[X]=\int_{\Omega}xp(x)\di x=\int_{\omega}x\mathbb{P}[X{=}x]\di x$ \\
+$\mathbb{E}_{Y|X}[Y]{=}\mathbb{E}_{Y}[Y|X]$ | $\mathbb{E}_{Y}[\mathbb{E}_{X}[X|Y]] {=} \mathbb{E}_{X}[X]$
+$\mathbb{E}_{X,Y}[f(X,Y)]=\mathbb{E}_{X}\mathbb{E}_{Y|X}[f(X,Y)|X]$
+% \vspace{4px} \\
+$\mathbb{V}(X){=}\mathbb{E}[(X{-}\mathbb{E}[X])^2]{=}\mathbb{E}[X^2]{-}\mathbb{E}[X]^2$\\
+$\text{Var}(X) {=} \mathbb{E}[\text{Var}(X \mid Y)] {+} \text{Var}(\mathbb{E}[X \mid Y])$  
+$\mathbb{V}[X{+}Y]{=}\mathrm{Var}[X]{+}\mathrm{Var}[Y]{+}2\Cov(X, Y)$ \\
+$\mathrm{Cov}(\bX ,\bY)=\E[]{\bX \bY^T} - \E[]{\bX }\E[]{\bY}^T$
+$\mathrm{Cov}(A\bX{+}c ,B\bY{+}d)=A\mathrm{Cov}(\bX ,\bY)B^T$ 
+% \vspace{3px}\\
+$\mathcal{N}(x|\mu, \Sigma)= \frac{exp(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))}{(2\pi)^{D/2}|\Sigma|^{1/2}} $\\
+$ X = \Sigma^{1/2} \NNormal + \mu \sampled \Normal{\mu}{\Sigma}$ \\
+$ Y = M X {+} b \sim \mathcal{N}(M\mu {+} b, M \Sigma M^T)$ \\
+$ X,Y \overset{\mathrm{iid}}{\sampled} \mathcal{N}:$ \quad $X{+}Y \sim \mathcal{N}(\mu {+} \mu', \Sigma {+} \Sigma')$
+
+\subsection*{Conditional Gaussian}
+$P(\begin{bmatrix}
+\mathbf{X}\\
+\mathbf{Y}\\
+\end{bmatrix}){=}\mathcal{N}(\begin{bmatrix}
+\mathbf{X}\\
+\mathbf{Y}\\
+\end{bmatrix}; \ \begin{bmatrix}
+\mathbf{\mu_1}\\
+\mathbf{\mu_2}\\
+\end{bmatrix},\begin{bmatrix}
+\Sigma_{11} & \Sigma_{12} \\
+\Sigma_{21} & \Sigma_{22}\\
+\end{bmatrix})$\\
+ $p(\mathbf{Y}|\mathbf{X} = \mathbf{x}) = \mathcal{N}(\mu, \Sigma) \\
+\cdot \  \mu =  \mathbf{\mu_2}+\Sigma_{21} \Sigma_{11}^{-1}(\mathbf{x}-\mathbf{\mu_X}) \\ 
+\cdot \  \Sigma = \Sigma_{22}- \Sigma_{21} \Sigma_{11}^{-1} \Sigma_{12}$
+
+
+\subsection*{Inequalities and Estimators}
+Jensen: $log(\sum_{i} \lambda_i^{(\geq 0)} x_i) \geq \sum_{i} \lambda_i log(x_i)$
+Chebyshev:$\mathbb{P}(|\hat{X}-X|\geq \epsilon)\leq \frac{MSE[\hat{X}]}{\epsilon^2}$
+\textbf{Estimators:} \quad \textit{Unbiased:} $\E{\hat{\Gt}} = \Gts$ \\
+\textit{Consistent:} $\P{|\hat{\Gt} - \Gts| < \epsilon}\rightarrow 0 \ \ $convP
+\textit{Asymp Normal:} $(\hat{\Gt} - \Gts)\hat{se}^{-1} \sampled \NNormal $
+\textit{Rao-Cra.}: 
+$\E[x|\Gt]{(\Gt {-} \Gth)^2} {\geq} \frac{(\frac{\partial}{\partial \Gt}b_{\Gth}+1)^2}{\E[x|\Gt]{\Lambda^2}} {+} b_{\Gth}^2$
+$b_{\Gth} = \E[x|\Gt]{\Gth} - \Gt$
+$\Lambda = \frac{\partial}{\partial \Gt} \log p(x|\Gt)$
+$\E[x|\Gt]{\Lambda} = 0 \rightarrow \E[x|\Gt]{\Lambda\Gth} = \frac{\partial}{\partial \Gt}b_{\Gth}+1$
+$ \rightarrow \Cov(\Lambda,\Gth) \rightarrow$ Cauchy \\
+$\mathrm{Var}[\hat{\theta}]\geq \mathcal{I}_n(\theta)^{-1} = -\mathbb{E}[\frac{\partial^2 \mathrm{log}p[\mathcal{X}_n|\theta]}{\partial \theta^2}]^{-1}$\\
+Efficiency of $\hat{\theta}$: $e(\theta_n)=\frac{1}{\mathrm{Var}[\hat{\theta}_n]\mathcal{I}_n(\theta)}$\\
+$\hat{\theta}_{JS} = \left( 1 - \frac{(d-2)\sigma^2}{\|y\|^2} \right) y$
+
+\textbf{Derivatives} \quad
+$\frac{\partial}{\partial \mathbf{x}}(\mathbf{b}^\top \mathbf{x}) = \frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^\top \mathbf{b}) = \mathbf{b}$ \\
+$\frac{\partial}{\partial \mathbf{x}}(\mathbf{x}^\top \mathbf{A}\mathbf{x}) = (\mathbf{A}^\top + \mathbf{A})\mathbf{x}$ \\
+$\frac{\partial}{\partial \mathbf{X}}(\mathbf{c}^\top \mathbf{X} \mathbf{b}) {=} \mathbf{c}\mathbf{b}^\top$
+$\frac{\partial}{\partial \mathbf{X}}(\|\mathbf{X}\|_F^2) {=} 2\mathbf{X}$
+$\frac{\partial}{\partial \mathbf{x}}\| \mathbf{x} \|_2 {=} \frac{\mathbf{x}}{\|\mathbf{x}\|_2}$ |
+$\frac{\partial}{\partial \mathbf{x}}||f(\mathbf{x})||_1 {=} \frac{\partial f(\mathbf{x})}{\partial \mathbf{x}}^T\text{sgn}(\mathbf{x})$
+$\frac{\partial}{\partial \mathbf{x}}(\|\mathbf{Ax - b}\|_2^2) = \mathbf{2A^\top( Ax- b)}$ \\
+$\frac{\partial}{\partial \mathbf{X}}(|\mathbf{X}|) = |\mathbf{X}|\cdot \mathbf{X}^{-1}$, $\quad |\bX|^{-1} = |\bX^{-1}|$\\
+$\frac{\partial}{\partial \bX} f(\bX)^\top {=} \frac{\partial f(\bX)}{\partial \bX}^T$ | 
+$\frac{\partial}{\partial \bX} \operatorname{tr}f(\bX) {=} \operatorname{tr}  \frac{\partial f(\bX)}{\partial \bX}$ \\
+$\frac{\partial}{\partial \bX} \det f(\bX) {=} \det f(\bX) \operatorname{tr} (f(\bX)^{-1} \frac{\partial f(\bX)}{\partial \bX})$ \\
+$\frac{\partial}{\partial \mathbf{X}} f(\mathbf{X})^{-1} = - f(\mathbf{X})^{-1} \frac{\partial f(\mathbf{X})}{\partial \mathbf{X}} f(\mathbf{X})^{-1}$ 
+\vspace{4 px} \\
+\textbf{Quadratic Forms} \\
+$\bx^TA\bx + 2\bb^T\bx + c = (\bx + A^{-1}\bb)^TA \\(\bx + A^{-1}\bb) - \bb^T A^{-1} \bb + c$, \\
+$ax^2+bx+c = (x + \frac{b}{2a})^2 - (\frac{b}{2a})^2 + c$
+\vspace{4 px} \\
+\textbf{Information Theory} \\
+$\operatorname{H}[p] = \mathbb{E}_{\mathbf{x} \sim p}\bigl[-\log p(\mathbf{x})\bigr]$ \\
+$\operatorname{H}[p \| q] = \mathbb{E}_{\mathbf{x} \sim p}\bigl[-\log q(\mathbf{x})\bigr]$ \\
+$\operatorname{KL}[p \| q] = \operatorname{H}[p \| q] - \operatorname{H}[p] $ \\
+$\operatorname{KL}[p \| q] = \mathbb{E}_{\theta \sim p}\Bigl[\log\Bigl(\tfrac{p(\theta)}{q(\theta)}\Bigr)\Bigr]$ \\
+$\operatorname{KL}[p \| q] \neq \operatorname{KL}[q \| p] \geq 0$ \\
+$\operatorname{H}[\mathbf{X}] = \mathbb{E}_{\mathbf{X} \sim p}\bigl[-\log p(\mathbf{X})\bigr]$ \\
+$\operatorname{H}[\mathbf{X} | \mathbf{Y} = y] = \mathbb{E}_{\mathbf{X} \sim p(\cdot | y)} \left[ -\log p(\mathbf{X} | y) \right]$ \\
+$\operatorname{H}[\mathbf{X} | \mathbf{Y}] = \mathbb{E}_{y} \left[ \operatorname{H}[\mathbf{X} | \mathbf{Y} = y] \right] $ \\
+$\operatorname{H}[\mathbf{X} | \mathbf{Y}] = \operatorname{H}[\mathbf{Y} | \mathbf{X}] {+} \operatorname{H}[\mathbf{X}] {-} \operatorname{H}[\mathbf{Y}]$ \\
+$\operatorname{H}[\mathbf{X}, \mathbf{Y}] {=} \mathbb{E}_{(\mathbf{X}, \mathbf{Y}) \sim p(\cdot, \cdot)} \left[ - \log p(\mathbf{X}, \mathbf{Y}) \right]$ \\
+$\operatorname{I}[\mathbf{X}; \mathbf{Y}] = \operatorname{H}[\mathbf{X}] - \operatorname{H}[\mathbf{X} | \mathbf{Y}] \geq 0 $  \\
+$\operatorname{I}[\mathbf{X}; \mathbf{Y} | \mathbf{Z}] = \operatorname{I}[\mathbf{X}; \mathbf{Y}, \mathbf{Z}] - \operatorname{I}[\mathbf{X}; \mathbf{Z}]$ \\
+$\operatorname{H}\bigl(\mathcal{N}(\mu, \Sigma) = \tfrac{1}{2}\ln(\det (2\pi e\,\Sigma))$ \\
+$\operatorname{KL}\bigl(\mathcal{N}(a, A) || \mathcal{N}(b, B)\bigr) = \frac{1}{2}(\operatorname{tr}(B^{-1}A) + (a - b)^T B^{-1} (a - b) - d + \ln(\frac{\det B}{\det A}))$ \\
+
+\textbf{Risks} \\
+%Conditional Expected Risk:\\
+%$R(f, X) = \int_\mathcal{Y} Q(Y, f(X)) P(Y|X)dY$ \\
+%where $Q(Y,f(X))$ is the loss function.\\
+%Total Expected Risk:\\
+%$R(f) = \mathbb{E}_\mathcal{X}[R(f, X)]$
+\textit{Expected Risk:} $R(f) = P(f (X) \neq y)$ \\
+$\mathcal{R}(f) = \sum_{y \leq  k}P(y)\mathbb{E}_{P(x|y)}[1_{{f(x) \neq y}}| Y = y]$
+
+\textit{Empirical Risk Minimizer (ERM)} $\hat{f}$:\\
+$\hat{f} \in \argmin_{f \in \HypotesisSpace} \hat{R}(\hat{f}, \Datatrain)$\\
+$\hat{R}(\hat{f}, \Datatrain) = \frac{1}{n} \sum_{i=1}^n \Lossfct(Y_i, \hat{f}(X_i))$\\
+$\hat{R}(\hat{f}, \Datatest) = \frac{1}{m} \sum_{i=n+1}^{n+m} \Lossfct(Y_i, \hat{f}(X_i))$
+
+\textbf{Loss Fcts:} 
+$\quad \mathcal{L}(y, z) \quad z{=} w^\top x$ \\
+$\mathcal{L}^{0/i} = \mathbb{I}[\text{sign}(z) \neq y]$ \\
+$\mathcal{L}^{\text{hinge}} = \max(0, 1 - yz) \quad \text{for SVM's} $\\
+$\mathcal{L}^{\text{percep}} = \max(0, -yz) $\\
+$\mathcal{L}^{\text{logistic}} = \log(1 + \exp(-yz)) $\\
+$\mathcal{L}^{\text{exp}} = \exp(-yz) \quad \text{for AdaBoost}$ \\
+$\mathcal{L}^{\text{CE}} = -[y' \log z' + (1 - y') \log (1 - z')] $
+$y' = \frac{1+y}{2}, \quad z' = \frac{1+z}{2}$
+
+% $\cdot L^{0-1}(y,z) {=} 1$ 
+% $\cdot L^{exp}(y,z){=}\mathrm{exp}({-}(2y{-}1)(2z{-}1))$\\
+% $\cdot L^{logis}(y,z){=}\mathrm{ln}(1{+}\mathrm{exp}((2y{-}1)(2z{-}1)))$\\
+% $\cdot L^{hinge}(y,z){=}\mathrm{max}\{0,1{-}(2y{-}1)(2z{-}1)\}$
+
+\textbf{Optimization} 
+\textit{GDM:}
+$\theta^{(t{+}1)}{\leftarrow}\theta^{(t)}{-}\eta\nabla_{\theta}\mathcal{L}{{+}}\mu(\theta^{(t)}{-}\theta^{(t{-}1)})$
+\textit{GD:}\ \ \ \ \ \ \ 
+$\theta^{(t{+}1)}{\leftarrow}\theta^{(t)}{-}\eta\nabla_{\theta}\mathcal{L}$\\
+\textit{SGD:}\ \ \ 
+$\Gt^{(t{+}1)} {\leftarrow} \Gt^{(t)} {-} \eta \nabla \mathcal{L}(\Gt^{(t)}, x_i, y_i)$ \\
+\textit{NGD:}\ 
+$\theta^{(t{+}1)}{\leftarrow}\theta^{(t)}{-}\eta(\nabla^2_{\theta}\mathcal{L})^{-1}\nabla_{\theta}\mathcal{L}$\\
+${\rightarrow}f(x{+}t){\approx}f(x){+}t f'(x){+}\frac{1}{2}f''(x)t^2 {=} 0$
+
+\subsection*{Parametric Density Estimation}
+Assume prior $\mathbb{P}(\theta)$,  \\
+Likelihood: $\mathbb{P}[\mathcal{X}|\theta]=\prod_{i\leq n}p(x_i|\theta)$\\
+$\hat{\theta}_{MLE} {=} \argmax_\theta \mathbb{P}[\mathcal{X}|\theta]$ \\
+$\hat{\theta}_{MAP} {=} \argmax_\theta [P(\theta|\mathcal{X}) {=} P(\mathcal{X}|\theta)P(\theta)]$
+Solve $\nabla_\theta log P(\mathcal{X}|\theta)P(\theta)=0$
+% Note:  $ P(\mathcal{Y}|\mathcal{X}, \beta) \sim \mathcal{N}(X^T\beta, \sigma^2)$\\
+% $\rightarrow \argmax_\theta log(P(\mathcal{Y}|\mathcal{X}, \beta))$\\
+% $\ \ = \argmax_\theta -\frac{1}{2\sigma^2}||Y-X^T\beta||^2$
+
+
+\subsection*{1-D Gaussian Bayesian learning}
+$X|\Gt \sim \mathcal{N}(\Gt, \sigma^2)$ $\Gt \sim \mathcal{N}(m_0, s_0^2)$
+$\Gt| X {\sim} \mathcal{N}(\mu_n, \sigma_n^2)$\\
+$\sigma_n^2 = \frac{\sigma^2 s_0^2}{ns_0^2 + \sigma^2}$, \quad
+$ \mu_n = \frac{ns_0^2\bar{x} + m_0\sigma^2}{ns_0^2 + \sigma^2}$ 
+
+\subsection*{Recursive Bayesian density learning}
+$\mathcal{X}^n=x_{1:n}:\ \ $
+$p(\theta{|}\mathcal{X}^n){=}\frac{p(x_n|\theta)p(\theta|\mathcal{X}^{n-1})}{\int p(x_n|\theta)p(\theta|\mathcal{X}^{n-1}) d\theta}$
+% Difficult \& needs prior knowledge. But better against overfitting.
+
+
+\subsection*{Frequentist vs Bayesian}
+Bayes: priors, distributions, needs efficient integration, adds regularization term. \\
+Frequentist: no priors, point estimate, requires only differentiation methods. MLE are consistent, equivariant, asymptotically normal, asymptotically efficient (no efficient for finite samples). 
+
+\subsection*{Data Types}
+monadic: $X{:} O {\rightarrow} \mathbb{R}^d$ 
+dyadic: $X{:} O_1 {\times} O_2 \rightarrow \mathbb{R}^d $.
+pairwise: $X{:} O_1 {\times} O_1 {\rightarrow} \mathbb{R}^d$ 
+polyadic data: $X{:} O_1 {\times} O_2 {\times} O_3 {\rightarrow} \mathbb{R}^d $ 
+nominal = qualitative (sweet, sour ...),
+ordinal = absolute order, 
+quantitative = numbers

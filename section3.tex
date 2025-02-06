@@ -1,0 +1,83 @@
+\section*{Nonlinear Regression}
+\textit{Idea:} Add feature space transformation, kernel to compute inner product. Suppose:\\
+$\beta \sampled \Normal{\bzero}{\Lambda^{-1}}$ $\Ge \sampled \Normal{\bzero}{\sigma_n^2\Midentity{d}}$
+$\bY {=} \bX \Gbb {+} \Geb \sampled \Normal{\bzero}{\bX \Lambda^{-1}\bX^T + \sigma_n^2\Midentity{d}}$
+
+\subsection*{Kernels}
+Kernel: $k(x_i, x_j) = \phi(x_i)\Lambda^{-1} \phi(x_j)^T$ \\
+Similarity based reasoning.\\
+Gram Matrix: \  $K = k(\mathbf{x}_i, \mathbf{x}_j), \quad 1{\leq} i,j{\leq} n$\\
+$\cdot k(\mathbf{x},\mathbf{x'}){=}k(\mathbf{x'},\mathbf{x}) \  \cdot k(\mathbf{x},\mathbf{x'})$ pos.semi-def. \\
+If $k_1$, $k_2$ kernels, $c\in\R_{>0}$, $\mathbf{A}^{psd}$, $p_{\text{pos-coeff}}$:\\
+$k(\mathbf{x}, \mathbf{x'}) = k_1(\mathbf{x}, \mathbf{x'}) {+} k_2(\mathbf{x}, \mathbf{x'})=\mathbf{x}^T \mathbf{A} \mathbf{x'}$
+$ = k_1(\mathbf{x}, \mathbf{x'}) {\cdot} k_2(\mathbf{x}, \mathbf{x'}) = c {\cdot} k_1(\mathbf{x}, \mathbf{x'})$\\
+${=}p(k_1(\mathbf{x}, \mathbf{x'}))$
+${=}f(\mathbf{x}) k_1(\mathbf{x}, \mathbf{x'}) f(\mathbf{x'})$\\
+
+$k(\mathbf{x}, \mathbf{x'}) = \phi(x)^T\phi(x') = (1 + \mathbf{x}^T\mathbf{x'})^m$\\
+$ = \mathrm{tanh}(\alpha\mathbf{x}^T\mathbf{x'}+c)$\\
+$ = \sigma^2\mathrm{exp}(-\frac{2\sin{(p^{-1} \pi ||\mathbf{x}{-}\mathbf{x'}||_2^2)}}{l^2})$\\
+$ = \mathrm{exp}(-||\mathbf{x}{-}\mathbf{x'}||_1 \ l^{-1})$\\
+$ = \mathrm{exp}(-||\mathbf{x}{-}\mathbf{x'}||_2^2 \ (2l^2)^{-1})$\\
+RBF: $\phi_j(x){=}\mathrm{exp}(-\frac{||x||_2^2}{2})\prod_{i=0}^{d}x^{j_i}({j_i}!)^{-\frac{1}{2}}$
+$\uparrow$ Lengthscale, smoother fcts.
+
+\subsection*{Gaussian Process Regression}
+Applying a kernel, we get: \\
+$\bY {=} \Phi \Gbb {+} \Geb \sampled \Normal{\bzero}{\Phi \Lambda^{-1}\Phi^T {+} \sigma_n^2\Midentity{d}} = $
+$\mathcal{N}(\begin{bmatrix}
+\mathbf{y}\\
+y_*\\
+\end{bmatrix}|\mathbf{0},\begin{bmatrix}
+    \mathbf{K}+\sigma^2\mathbb{I} & \mathbf{k} \\
+    \mathbf{k^T} & k(x_*,x_*) + \sigma^2\\
+\end{bmatrix})$\\
+
+\subsection*{Gaussian Process Prediction}
+Given $\mathcal{GP}(\mu, K)$, \\
+$p(y_*|x_*,\mathbf{X},\mathbf{y}) = \mathcal{N}(\tilde \mu, \tilde \sigma^2)$,\\
+$\cdot \ \tilde\mu = \mu(x_*) {+} \mathbf{k}^T(\mathbf{K}+\sigma_n^2\mathbb{I})^{-1}(\mathbf{y} {-} \mu(\bX))$,\\
+$\cdot \ \tilde\sigma^2 = k(x_*,x_*) - \mathbf{k}^T(\mathbf{K}+\sigma^2\mathbb{I})^{-1}\mathbf{k}$\\
+$\cdot \ \mathbf{k}=k(x_*,\mathbf{X})\quad \mathbf{K}_{ij}=k(x_i,x_j)$ \\
+$\cdot \ \tilde\sigma^2_{ij} = k(x_i,x_j) - \mathbf{k}^T_i(\mathbf{K}+\sigma^2\mathbb{I})^{-1}\mathbf{k}_j$\\
+
+\section*{Causality}
+Regression models capture correlation (not causality). ie, non-causal features can mislead models (\textit{Spurious Correlations}). Iff Train Test Distribution change (\textit{Domain Shift}).
+\textit{Counterfactual Invariance:} A function $f$ is invariant if $f(X(w)) = f(X(w'))$ for any $w, w'$, reducing bias from spurious correlations. \\
+\textbf{Confounding:} A hidden variable influences both $W$ and $X$, creating a spurious correlation with $Y$.
+\textbf{Selection Bias:} A hidden variable $S$ filters the training data based on $W$ and $X$, inducing non-causal associations.
+
+If $f$ is a counterfactually invariant predictor:
+In the \textbf{anti-causal scenario}: $f(X) {\perp} W {\mid} Y$.
+In the \textbf{causal scenario} (no selection but confounded): $f(X) {\perp} W$.
+In the \textbf{causal scenario} (no confounding but selected): $Y \perp X \mid W, X_{\perp W}$ and $f(X) \perp W \mid Y$.
+
+A set of variables $Z$ $\textbf{d-separates}$ $X$ and $Y$ in a DAG $\mathcal{G}$ if all paths between $X$ and $Y$ are blocked by $Z$: $ X{\perp} Y | Z$. A path is blocked if:
+\textbf{Collider:} $A {\to} B {\leftarrow} C$ and neither $B$ nor its descendants are in $Z$.
+\textbf{Chain:} $A {\to} B {\to} C$. \textbf{Fork:} $A {\leftarrow} B {\to} C$ where $B \in Z$.
+
+\section*{Algos}
+\textbf{K-Means} 
+$J {=} \sum_{x \in \mathcal{X}} \| x - \mu_{c(x)} \|^2$
+
+\textbf{PCA} proj. maximum variance subspace.
+top $d$ eigenv. of $S {=} \frac{1}{n} \sum_{i=1}^{n} (x_i {-} \bar{X})(x_i {-} \bar{X})^T$
+
+\textbf{EM} fit GMMs $(\sum_{k=1}^{K} \pi_k \mathcal{N}(x | \mu_k, \Sigma_k))$ by max. likelihood. Reaches local optimum.\\
+Latent variable: $M_{xc} = 1_{c \text{ generated } x}$ \\
+$P(\mathcal{X}, M | \theta) {=} \prod_{x} \prod_{c=1}^{k} (\pi_c P(x | \theta_c))^{M_{xc}}$
+$\gamma_{xc} {=} \mathbb{E}[M_{xc} | \mathcal{X}, \theta^{(j)}] {=} \frac{P(x | c, \theta^{(j)}) P(c | \theta^{(j)})}{P(x | \theta^{(j)})}$ \\
+$\mu_c^{(j+1)} {=} \frac{\sum_{c \in \mathcal{X}} \gamma_{xc} x}{\sum_{c \in \mathcal{X}} \gamma_{xc}}$
+$\pi_c^{(j+1)} {=} \frac{1}{|\mathcal{X}|} \sum_{c \in \mathcal{X}} \gamma_{xc}$ 
+$(\sigma_c^2)^{(j+1)} {=} \frac{\sum_{c \in \mathcal{X}} \gamma_{xc} (x - \mu_c)^2}{\sum_{c \in \mathcal{X}} \gamma_{xc}}$ \\
+
+\section*{Bias-Variance tradeoff}
+Bias($\hat{f}$)$=\mathbb{E}[\hat{f}]-f$\\
+Var($\hat{f}$)$=\mathbb{E}[(\hat{f}-\mathbb{E}[\hat{f}])^2]$
+\subsection*{Squared Error Decomposition}
+$\mathbb{E}_D\mathbb{E}_{X,Y}[(\hat{f}(X)-Y)^2]=$\\
+$\mathbb{E}_{X,Y}[(\mathbb{E}_{Y|X}[Y]-Y)^2]$ (noise var)\\
+$+\mathbb{E}_X\mathbb{E}_D[(\hat{f}_D(X)-\mathbb{E}_D[\hat{f}(X)])^2]$ (var.)\\
+$+\mathbb{E}_X[(\mathbb{E}_D[\hat{f}_D(X)]-\mathbb{E}_{Y|X}[Y])^2]$ (bias$^2$)\\
+With $\mathbb{E}_{Y|X}[Y]$ the expected label and $\mathbb{E}_{D}[\hat{f}(X)]$ the expected classifier.
+
