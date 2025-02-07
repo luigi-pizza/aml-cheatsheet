@@ -7,17 +7,16 @@ $(\mathbf{A} {+} \mathbf{U} \mathbf{C} \mathbf{V})^{\text{-}} {=} \mathbf{A}^{\t
 $(\mathbf{A} + \mathbf{B})^{-1} = \mathbf{A}^{-1} - \mathbf{A}^{-1} (\mathbf{A} + \mathbf{B})^{-1} \mathbf{A}^{-1}$ \\
 $\mathbf{U} (\mathbf{V} \mathbf{U} + \mathbf{I})^{-1} = (\mathbf{U} \mathbf{V} + \mathbf{I})^{-1} \mathbf{U}$ \\
 $\mathbf{I} - \mathbf{A} (\mathbf{I} + \mathbf{A})^{-1} = (\mathbf{I} + \mathbf{A})^{-1}$
-\vspace{4px}\\
+\vspace{6px}\\
 \textbf{Probability}\\
-$\text{Ber}(x|\theta) = \theta^x(1-\theta)^{1-x} \quad 0 \leq \theta \leq 1$
-$\mathbb{P}[X|Y]=\frac{\mathbb{P}[X,Y]}{\mathbb{P}[Y]}=\frac{\mathbb{P}[Y|X]\mathbb{P}[X]}{\mathbb{P}[Y]}$ \\
+$B(a,b) = \Gamma(a) \Gamma(b)\Gamma^{\text{-1}}(a {+} b)$ \\
+$\Gamma(a) = \int_{0}^{\infty} e^{-x} x^{a-1} \,dx$ \\ 
+$\text{Ber}(x|\theta) = \theta^x(1-\theta)^{1-x} \quad 0 \leq \theta \leq 1$ \\
 $p_{Y}(y) = p_{X}(g^{-1}(y)) \left| \det \frac{\partial g^{-1}(y)}{\partial y} \right|$
 % \vspace{4px}\\
-$\mathbbm{E}[X]=\int_{\Omega}xp(x)\di x=\int_{\omega}x\mathbb{P}[X{=}x]\di x$ \\
 $\mathbb{E}_{Y|X}[Y]{=}\mathbb{E}_{Y}[Y|X]$ | $\mathbb{E}_{Y}[\mathbb{E}_{X}[X|Y]] {=} \mathbb{E}_{X}[X]$
 $\mathbb{E}_{X,Y}[f(X,Y)]=\mathbb{E}_{X}\mathbb{E}_{Y|X}[f(X,Y)|X]$
 % \vspace{4px} \\
-$\mathbb{V}(X){=}\mathbb{E}[(X{-}\mathbb{E}[X])^2]{=}\mathbb{E}[X^2]{-}\mathbb{E}[X]^2$\\
 $\text{Var}(X) {=} \mathbb{E}[\text{Var}(X \mid Y)] {+} \text{Var}(\mathbb{E}[X \mid Y])$  
 $\mathbb{V}[X{+}Y]{=}\mathrm{Var}[X]{+}\mathrm{Var}[Y]{+}2\Cov(X, Y)$ \\
 $\mathrm{Cov}(\bX ,\bY)=\E[]{\bX \bY^T} - \E[]{\bX }\E[]{\bY}^T$

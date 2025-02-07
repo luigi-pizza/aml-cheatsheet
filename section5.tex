@@ -30,15 +30,7 @@ $f(w^*) {=} L(\eta^*, w^*)$ and
 $\alpha_j h_j(w^*) = 0, \quad \forall j \leq n.$
 
 
-% \subsection*{Bayes Optimal Classifier}
-% Minimizes total risk for 0-1 Loss\\
-% $\hat{c}(x){=}
-% \begin{cases} 
-%        y & \mathbb{P}[y|x]>{1-d},\exists y\\
-%        \mathcal{D} & \mathbb{P}[y|x]<1-d,\forall y
-%    \end{cases}
-%  $\\
-%  Generalize to other loss functions
+
 
 %  \subsection*{Discriminant Functions}
 %  Functions $g_k(x)\quad1\leq k\leq K$\\
@@ -137,13 +129,13 @@ s.t. $(\mathbf{w}_{y_i}^T\mathbf{x}_i+w_{y_i,0})-$\\
 $\quad \ \ \max_{y\not=y_i}(\mathbf{w}_y^T\mathbf{x}_i+w_{y,0})\geq 1, \forall {\mathbf{x}_i\in \mathcal{X}}$ \\
 classification: $\hat y = argmax_y (w_y^Tx + w_{y,0})$
 
-\subsection*{Structured SVM}
-Each \textbf{x} is assigned to a structured output label $y$.
-Output Space Representation:\\
-joint feature map: $\mathbf{\psi}(y,\mathbf{x})$\\
-Scoring function: $f_{\mathbf{w}}(y,\mathbf{x})=\mathbf{w}^T\mathbf{\psi(y, \mathbf{x})}$\\
-Classify: $\hat{y}=h(\mathbf{x})=\argmax_{y\in\mathbb{K}}f_{\mathbf{w}(y, \mathbf{x})}$
-SVM objective: \\ $w^T\mathbf{\psi}(y_i,\mathbf{x_i})-max_{y_i \neq y}w^T\mathbf{\psi}(y,\mathbf{x_i}) \geq m$ \\
-with margin rescaling: $min_{w, \xi \geq 0} \frac{1}{2}w^Tw + C \sum_{i=1}^n \xi_i$ s.t. $w^T\mathbf{\psi}(y_i,\mathbf{x_i})-\Delta(y,y_i)
--w^T\mathbf{\psi}(y,\mathbf{x_i}) \geq - \xi_i$ $\forall y \neq y_i$ $\forall i$ \\
-Lagrangian: let $\mathbb{K}_i = \mathbb{K} \backslash {y_i}$ \\ $\frac{1}{2}w^Tw + C \sum_{i=1}^n \xi_i - \sum_{i=1}^n \sum_{y_j \in \mathbb{K}_i} \alpha_{i,j} (w^T \psi(y_i, x_i)- \Delta (y_j, y_i) - w^T \psi(y_j,x_i)+ \xi_i) - \sum_{i=1}^n \beta_i \xi_i$ with $\alpha_{i,j} \geq 0, \beta_i \geq 0$ 
+% \subsection*{Structured SVM}
+% Each \textbf{x} is assigned to a structured output label $y$.
+% Output Space Representation:\\
+% joint feature map: $\mathbf{\psi}(y,\mathbf{x})$\\
+% Scoring function: $f_{\mathbf{w}}(y,\mathbf{x})=\mathbf{w}^T\mathbf{\psi(y, \mathbf{x})}$\\
+% Classify: $\hat{y}=h(\mathbf{x})=\argmax_{y\in\mathbb{K}}f_{\mathbf{w}(y, \mathbf{x})}$
+% SVM objective: \\ $w^T\mathbf{\psi}(y_i,\mathbf{x_i})-max_{y_i \neq y}w^T\mathbf{\psi}(y,\mathbf{x_i}) \geq m$ \\
+% with margin rescaling: $min_{w, \xi \geq 0} \frac{1}{2}w^Tw + C \sum_{i=1}^n \xi_i$ s.t. $w^T\mathbf{\psi}(y_i,\mathbf{x_i})-\Delta(y,y_i)
+% -w^T\mathbf{\psi}(y,\mathbf{x_i}) \geq - \xi_i$ $\forall y \neq y_i$ $\forall i$ \\
+% Lagrangian: let $\mathbb{K}_i = \mathbb{K} \backslash {y_i}$ \\ $\frac{1}{2}w^Tw + C \sum_{i=1}^n \xi_i - \sum_{i=1}^n \sum_{y_j \in \mathbb{K}_i} \alpha_{i,j} (w^T \psi(y_i, x_i)- \Delta (y_j, y_i) - w^T \psi(y_j,x_i)+ \xi_i) - \sum_{i=1}^n \beta_i \xi_i$ with $\alpha_{i,j} \geq 0, \beta_i \geq 0$ 

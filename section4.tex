@@ -3,7 +3,7 @@
 Find $f: X \to Y$ to minimize expected risk by approximation with empirical risk.
 
 \subsection*{K-Fold Cross Validation}
-Partition data $Z$ into $K$ equally sized, disjoint subsets:\\
+Partition data $Z$ into $K$ equa. subsets:\\
 $\mathcal{Z}=\mathcal{Z}_1\bigcup\mathcal{Z}_2\bigcup\cdots\bigcup\mathcal{Z}_K, \mathcal{Z}_\mu \bigcap\mathcal{Z}_\nu = \emptyset $
 $|\mathcal{Z}_k|\approx n\frac{K-1}{K}$ \# of training samples. Learn:
 $\hat{f}^{-\nu}(x){=} \argmin_{f\in\mathcal{F}}\frac{\sum_{i\not\in\mathcal{Z}_\nu}\mathcal{L}(y_i,f(x_i))}{|\mathcal{Z}-\mathcal{Z}_{\nu}|}$\\
@@ -11,10 +11,8 @@ $\hat{R}^{cv}(\mathcal{A}) = \frac{1}{n}\sum_{i\leq n}\mathcal{L}(y_i,\hat{f}^{-
 Underfits because smaller dataset.\\
 \textbf{Leave-one-out:} $K=n$ (unbiased but var can be large from correlated datasets)
 
-\subsection*{Bootstrapping}
-Bootstrap samples: $\mathcal{Z}^*=\{\mathcal{Z}_1^*, \cdots\mathcal{Z}_B^*\}$, of same size as original, drawn with replacement.
-The chance of a sample to have appeared in the bootstrap is:\\
-$1-(1-\frac{1}{n})\stackrel{n\to\infty}{\to} 1-\frac{1}{e}\approx 0.632$. So if we compute the ERM on $\mathcal{Z}$ we could get 63\% accuracy by memorization. Over-confident (shows too small bias)!\\
+\textbf{Bootstrapping} $\mathcal{Z}^*=\{\mathcal{Z}_1^*, \cdots\mathcal{Z}_B^*\}$, of same size as original, drawn with replacement.
+a sample to have appears in bootstrap with prob: $1{-}(1{-}n^{-1}){\approx} 0.632$. So if we compute the ERM on $\mathcal{Z}$ we could get 63\% accuracy by memorization. Over-confident (shows too small bias)!\\
 \textbf{Leave-one-out/out of bucket error}: compensates by computing the ERM where no memorization was for specific sample. E.g., for classification, like cross-validation:\\
 $\hat{\mathcal{R}}(\mathcal{A})=\frac{1}{B}\sum_{b=1}^B\sum_{z_i\not\in\mathcal{Z}^{*b}}\frac{\mathbb{I}_{c(x_i)\neq y_i}}{B-\lvert\mathcal{Z}^{*b}\rvert}$
 $\hat{R}_{0.632} = 0.368 \hat{R}(A(Z)) + 0.632 \hat{R}_{bs}$ \\
@@ -38,11 +36,16 @@ $x_n = \arg\max_{x \in \hat{S}_n= \{ x \mid u^g_n(x) \geq 0 \}} u^f_n(x)$
 \textbf{Batch Active Learning | ProbCover} \\
 $G {=} (X, E)$, $E {=} \{(x, x') \mid \|x {-} x'\| {\leq} \delta\}$
 $L {\gets} \emptyset$
-$\forall i = 1, 2, \dots, b$
+$\forall i = 1, 2, \dots, b\{$
 $\hat{x} \gets \arg\max_{x \in X} |\{x' \mid (x, x') \in E, x' \in X\}|$
-$L {\gets} L \cup \{\hat{x}\}$ \ | \ \ 
-$E {\gets} E {\setminus} (\{\hat{x}\} {\times} (B_{\delta}(\hat{x}) \cap X))$
+$L {\gets} L {\cup} \{\hat{x}\}$ \ | \ \ 
+$E {\gets} E {\setminus} (\{\hat{x}\} {\times} (B_{\delta}(\hat{x}) \cap X))\}$
 
+\textbf{Max Mean Discrep.}
+$MMD^2 (\mathcal{F}, X, Y) = \sup_{\| f \|_{\mathcal{H}} \leq 1} [( \mathbb{E}_P[f(x)] - \mathbb{E}_q[f(y)] )^2 = ( \mathbb{E}_P \langle \phi(x), f \rangle_{\mathcal{H}} - \mathbb{E}_q \langle \phi(y), f \rangle_{\mathcal{H}} ) ^2 = $
+$\langle \mu_x - \mu_y, f \rangle_{\mathcal{H}} ^2 ]$
+$= \| \mu_x - \mu_y \|_{\mathcal{H}}^2 \\$
+$= \mathbb{E} [k(x, x')] + \mathbb{E} [k(y, y')] - 2 \mathbb{E} [k(x, y)]$
 
 
 % \subsection*{Jackknife}

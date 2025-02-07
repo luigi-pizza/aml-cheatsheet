@@ -42,15 +42,15 @@ $\cdot \ \mathbf{k}=k(x_*,\mathbf{X})\quad \mathbf{K}_{ij}=k(x_i,x_j)$ \\
 $\cdot \ \tilde\sigma^2_{ij} = k(x_i,x_j) - \mathbf{k}^T_i(\mathbf{K}+\sigma^2\mathbb{I})^{-1}\mathbf{k}_j$\\
 
 \section*{Causality}
-Regression models capture correlation (not causality). ie, non-causal features can mislead models (\textit{Spurious Correlations}). Iff Train Test Distribution change (\textit{Domain Shift}).
-\textit{Counterfactual Invariance:} A function $f$ is invariant if $f(X(w)) = f(X(w'))$ for any $w, w'$, reducing bias from spurious correlations. \\
-\textbf{Confounding:} A hidden variable influences both $W$ and $X$, creating a spurious correlation with $Y$.
+% Regression models capture correlation (not causality). ie, non-causal features can mislead models (\textit{Spurious Correlations}). Iff Train Test Distribution change (\textit{Domain Shift}).
+\textit{Counterfactual Invariance:} A function $f$ is invariant if $f(X(w)) = f(X(w'))$  $\forall w, w'$, \\$\downarrow$ bias from spurious correlations. \\
+\textbf{Confounding:} A hidden variable influences $W$ and $X$, ${\Rightarrow}$ spurious correlation with $Y$.
 \textbf{Selection Bias:} A hidden variable $S$ filters the training data based on $W$ and $X$, inducing non-causal associations.
 
-If $f$ is a counterfactually invariant predictor:
-In the \textbf{anti-causal scenario}: $f(X) {\perp} W {\mid} Y$.
-In the \textbf{causal scenario} (no selection but confounded): $f(X) {\perp} W$.
-In the \textbf{causal scenario} (no confounding but selected): $Y \perp X \mid W, X_{\perp W}$ and $f(X) \perp W \mid Y$.
+If $f$ is counterf. invar.: \\
+\textit{anti-causal scenario}: $f(X) {\perp} W {\mid} Y$. \\
+\textit{causal scenario} (no selection): $f(X) {\perp} W$. \\
+\textit{causal scenario} (no confounding): $Y \perp X \mid W, X_{\perp W}$ and $f(X) \perp W \mid Y$.
 
 A set of variables $Z$ $\textbf{d-separates}$ $X$ and $Y$ in a DAG $\mathcal{G}$ if all paths between $X$ and $Y$ are blocked by $Z$: $ X{\perp} Y | Z$. A path is blocked if:
 \textbf{Collider:} $A {\to} B {\leftarrow} C$ and neither $B$ nor its descendants are in $Z$.
@@ -70,6 +70,10 @@ $\gamma_{xc} {=} \mathbb{E}[M_{xc} | \mathcal{X}, \theta^{(j)}] {=} \frac{\pi_c 
 $\mu_c^{(j+1)} {=} \frac{\sum_{c \in \mathcal{X}} \gamma_{xc} x}{\sum_{c \in \mathcal{X}} \gamma_{xc}}$
 $\pi_c^{(j+1)} {=} \frac{1}{|\mathcal{X}|} \sum_{c \in \mathcal{X}} \gamma_{xc}$ 
 $(\sigma_c^2)^{(j+1)} {=} \frac{\sum_{c \in \mathcal{X}} \gamma_{xc} (x - \mu_c)^2}{\sum_{c \in \mathcal{X}} \gamma_{xc}}$ \\
+
+
+\textbf{Perceptron} Bound: $\frac{\max_{i \in \tilde{\mathcal{X}}^{mc}} \|\tilde{x}_i\|^2 \|\hat{a}\|}{(\min_{i \in \tilde{\mathcal{X}}^{mc}} (\hat{a}^\top \tilde{x}_i))^2}$
+
 
 \section*{Bias-Variance tradeoff}
 Bias($\hat{f}$)$=\mathbb{E}[\hat{f}]-f$\\
